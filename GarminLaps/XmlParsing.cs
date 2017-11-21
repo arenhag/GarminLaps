@@ -26,7 +26,7 @@ namespace GarminLaps
         internal void ReadTcxFile()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.Load("2155649148.tcx");
+            xmlDocument.Load("twoLaps.tcx");
             
             var nsManager = new XmlNamespaceManager(xmlDocument.NameTable);
             nsManager.AddNamespace("blaha", "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2");
