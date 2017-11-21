@@ -11,14 +11,19 @@ namespace GarminLaps
 
     // Vissa parametrar som hör till ett Lap måste beräknas om (t.ex. AverageHeartRateBpm o.s.v.)
 
-    class XmlParsing
+    internal class XmlParsing
     {
-        public void Main()
+        internal void Main()
         {
             ReadTcxFile();
         }
 
-        private void ReadTcxFile()
+        internal int JunkMethodForTest(int a, int b)
+        {
+            return a + b;
+        }
+
+        internal void ReadTcxFile()
         {
             var xmlDocument = new XmlDocument();
             xmlDocument.Load("2155649148.tcx");
