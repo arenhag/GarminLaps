@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Xml;
 
@@ -10,16 +11,14 @@ namespace GarminLaps
 
     // Vissa parametrar som hör till ett Lap måste beräknas om (t.ex. AverageHeartRateBpm o.s.v.)
 
-    class Program
+    class XmlParsing
     {
-        static void Main(string[] args)
+        public void Main()
         {
             ReadTcxFile();
-            Console.Write("Klart!");
-            Console.ReadLine();
         }
 
-        private static void ReadTcxFile()
+        private void ReadTcxFile()
         {
             var xmlDocument = new XmlDocument();
             xmlDocument.Load("2155649148.tcx");
@@ -37,8 +36,8 @@ namespace GarminLaps
                 var lapLength = double.Parse(lap.SelectSingleNode("blaha:TotalTimeSeconds", nsManager).InnerXml);
                 var lapEndTime = lapStartTime.AddSeconds(lapLength);
 
-                Console.WriteLine("Lap #{0} Start time:\t{1}", lapIndex, lapStartTime);
-                Console.WriteLine("Lap #{0} End time:\t{1}", lapIndex, lapEndTime);
+                Debug.WriteLine("Lap #{0} Start time:\t{1}", lapIndex, lapStartTime);
+                Debug.WriteLine("Lap #{0} End time:\t{1}", lapIndex, lapEndTime);
 
                 var calories = int.Parse(lap.SelectSingleNode("blaha:Calories", nsManager).InnerXml);
                 var accumulatedHeartRates = 0;
