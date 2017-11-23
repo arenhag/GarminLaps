@@ -22,19 +22,34 @@ namespace UnitTests
             Assert.Equal(expectedResult, actualResult);
         }
 
-        [Fact]
-        public void ShouldReturnCorrectNumberOfLaps()
+        [Theory]
+        [InlineData("twoLaps.tcx",2)]
+        public void ShouldReturnCorrectNumberOfLaps(string testFileLocation, int expectedResult)
         {
             // Arrange
             var blaha = new TcxFileReader();
-            var expectedResult = 2;
-            var testFileLocation = "twoLaps.tcx";
-
+            
             // Act
             var actualResult = blaha.ReadTcxFile(testFileLocation);
 
             // Assert
             Assert.Equal(expectedResult, actualResult.Laps.Count);
+        }
+
+        [Theory]
+        [InlineData("twoLaps.tcx", 0, 800)]
+        [InlineData("twoLaps.tcx", 1, 900)]
+        public void ShouldReturnCorrectNumberOfTrackPointsPerLap(string testFileLocation, int lapNumber, int trackPointCount)
+        {
+            // Arrange
+            var blaha = new TcxFileReader();
+            var expectedResult = trackPointCount;
+
+            // Act
+            var actualResult = blaha.ReadTcxFile(testFileLocation);
+
+            // Assert
+            Assert.Equal(expectedResult, actualResult.Laps[lapNumber].TrackPoints.Count);
         }
     }
 }

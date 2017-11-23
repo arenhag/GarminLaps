@@ -28,12 +28,13 @@ namespace GarminLaps
             nsManager.AddNamespace("blaha", "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2");
 
             var laps = xmlDocument.SelectNodes("blaha:TrainingCenterDatabase/blaha:Activities/blaha:Activity/blaha:Lap", nsManager);
+            var lapDataToReturn = new LapData();
 
-            var lapIndex = 1;
+            //var lapIndex = 1;
 
             foreach (XmlNode lap in laps)
             {
-                var lapStartTime = DateTime.Parse(lap.Attributes["StartTime"].Value);
+                /*var lapStartTime = DateTime.Parse(lap.Attributes["StartTime"].Value);
                 var lapLength = double.Parse(lap.SelectSingleNode("blaha:TotalTimeSeconds", nsManager).InnerXml);
                 var lapEndTime = lapStartTime.AddSeconds(lapLength);
 
@@ -50,12 +51,15 @@ namespace GarminLaps
                     accumulatedHeartRates += heartRate;
                 }
 
-                lapIndex++;
+                lapIndex++;*/
+                var trackPoints = lap.SelectNodes("blaha:Track/blaha:Trackpoint", nsManager);
+
+                lapDataToReturn.Laps.Add(new Lap());
             }
 
             xmlDocument.Save("test.tcx");
 
-            return new LapData();
+            return lapDataToReturn;
         }
     }
 }
