@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarminLaps", "GarminLaps\GarminLaps.csproj", "{E0F9E8ED-CF20-4DF0-9609-C3F1EFBAB335}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{B745C6FB-D1EC-434C-83E8-43BA1680DB02}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarminLapsTests", "GarminLapsTests\UnitTests.csproj", "{B745C6FB-D1EC-434C-83E8-43BA1680DB02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

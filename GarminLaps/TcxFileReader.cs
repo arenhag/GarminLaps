@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Xml;
+using GarminLaps.Dto;
 
 namespace GarminLaps
 {
@@ -11,22 +12,17 @@ namespace GarminLaps
 
     // Vissa parametrar som hör till ett Lap måste beräknas om (t.ex. AverageHeartRateBpm o.s.v.)
 
-    internal class XmlParsing
+    internal class TcxFileReader
     {
-        internal void Main()
-        {
-            ReadTcxFile();
-        }
-
         internal int JunkMethodForTest(int a, int b)
         {
             return a + b;
         }
 
-        internal void ReadTcxFile()
+        internal LapData ReadTcxFile(string fileLocation)
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.Load("twoLaps.tcx");
+            xmlDocument.Load(fileLocation);
             
             var nsManager = new XmlNamespaceManager(xmlDocument.NameTable);
             nsManager.AddNamespace("blaha", "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2");
@@ -58,6 +54,8 @@ namespace GarminLaps
             }
 
             xmlDocument.Save("test.tcx");
+
+            return new LapData();
         }
     }
 }
