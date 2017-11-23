@@ -6,8 +6,21 @@
             "command": "dotnet",
             "type": "process",
             "args": [
-                "build",
-                "${workspaceFolder}/GarminLaps/GarminLaps.csproj"
+                "build" //,
+                //"${workspaceFolder}/GarminLaps/GarminLaps.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test",
+            "command": "dotnet",
+            "options": 
+                {
+                    "cwd": "${workspaceFolder}/GarminLapsTests"
+                },
+            "type": "process",
+            "args": [
+                "xunit"
             ],
             "problemMatcher": "$msCompile"
         }
