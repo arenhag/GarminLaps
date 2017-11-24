@@ -30,7 +30,6 @@ namespace GarminLaps
             var laps = xmlDocument.SelectNodes("blaha:TrainingCenterDatabase/blaha:Activities/blaha:Activity/blaha:Lap", nsManager);
             var lapDataToReturn = new LapData();
 
-            //var lapIndex = 1;
 
             foreach (XmlNode lap in laps)
             {
@@ -39,26 +38,17 @@ namespace GarminLaps
                 /*var lapStartTime = DateTime.Parse(lap.Attributes["StartTime"].Value);
                 var lapLength = double.Parse(lap.SelectSingleNode("blaha:TotalTimeSeconds", nsManager).InnerXml);
                 var lapEndTime = lapStartTime.AddSeconds(lapLength);
-
-                Debug.WriteLine("Lap #{0} Start time:\t{1}", lapIndex, lapStartTime);
-                Debug.WriteLine("Lap #{0} End time:\t{1}", lapIndex, lapEndTime);
-
-                var calories = int.Parse(lap.SelectSingleNode("blaha:Calories", nsManager).InnerXml);
-                var accumulatedHeartRates = 0;
-                var trackPoints = lap.SelectNodes("blaha:Track/blaha:Trackpoint", nsManager);
-
-                foreach (XmlNode trackPoint in trackPoints)
-                {
-                    var heartRate = int.Parse(trackPoint.SelectSingleNode("blaha:HeartRateBpm/blaha:Value", nsManager).InnerXml);
-                    accumulatedHeartRates += heartRate;
-                }
-
-                lapIndex++;*/
+                var calories = int.Parse(lap.SelectSingleNode("blaha:Calories", nsManager).InnerXml);*/
                 
                 var trackPoints = lap.SelectNodes("blaha:Track/blaha:Trackpoint", nsManager);
                 foreach (XmlNode trackPoint in trackPoints)
                 {
-                    lapToReturn.TrackPoints.Add(new TrackPoint());
+                    var trackPointToReturn = new TrackPoint()
+                    {
+                        HeartRateBpm = int.Parse(trackPoint.SelectSingleNode("blaha:HeartRateBpm/blaha:Value", nsManager).InnerXml)
+                    };
+                    
+                    lapToReturn.TrackPoints.Add(trackPointToReturn);
                 }
 
                 lapDataToReturn.Laps.Add(lapToReturn);

@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using GarminLaps;
+using System.Linq;
 
 namespace UnitTests
 {
@@ -50,6 +51,23 @@ namespace UnitTests
 
             // Assert
             Assert.Equal(expectedResult, actualResult.Laps[lapNumber].TrackPoints.Count);
+        }
+
+        [Fact]
+        public void ShouldHaveHeartRatesInAllTrackPoints()
+        {
+            // Arrange
+            var testFileLocation = "twoLaps.tcx";
+            var blaha = new TcxFileReader();
+            var expectedResult = 0;
+
+            // Act
+            var actualResult = blaha.ReadTcxFile(testFileLocation);
+            var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.HeartRateBpm < 1));
+            var actualResultCount = allTrackPoints.Count();
+
+            // Assert
+            Assert.Equal(expectedResult, actualResultCount);
         }
     }
 }
