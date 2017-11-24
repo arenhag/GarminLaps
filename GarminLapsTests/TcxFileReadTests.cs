@@ -37,8 +37,8 @@ namespace UnitTests
         }
 
         [Theory]
-        [InlineData("twoLaps.tcx", 0, 800)]
-        [InlineData("twoLaps.tcx", 1, 900)]
+        [InlineData("twoLaps.tcx", 0, 801)]
+        [InlineData("twoLaps.tcx", 1, 672)]
         public void ShouldReturnCorrectNumberOfTrackPointsPerLap(string testFileLocation, int lapNumber, int trackPointCount)
         {
             // Arrange

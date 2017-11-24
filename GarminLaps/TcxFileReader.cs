@@ -34,6 +34,8 @@ namespace GarminLaps
 
             foreach (XmlNode lap in laps)
             {
+                var lapToReturn = new Lap();
+
                 /*var lapStartTime = DateTime.Parse(lap.Attributes["StartTime"].Value);
                 var lapLength = double.Parse(lap.SelectSingleNode("blaha:TotalTimeSeconds", nsManager).InnerXml);
                 var lapEndTime = lapStartTime.AddSeconds(lapLength);
@@ -52,9 +54,14 @@ namespace GarminLaps
                 }
 
                 lapIndex++;*/
+                
                 var trackPoints = lap.SelectNodes("blaha:Track/blaha:Trackpoint", nsManager);
+                foreach (XmlNode trackPoint in trackPoints)
+                {
+                    lapToReturn.TrackPoints.Add(new TrackPoint());
+                }
 
-                lapDataToReturn.Laps.Add(new Lap());
+                lapDataToReturn.Laps.Add(lapToReturn);
             }
 
             xmlDocument.Save("test.tcx");
