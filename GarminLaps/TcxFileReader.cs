@@ -45,7 +45,8 @@ namespace GarminLaps
                 {
                     var trackPointToReturn = new TrackPoint()
                     {
-                        HeartRateBpm = int.Parse(trackPoint.SelectSingleNode("blaha:HeartRateBpm/blaha:Value", nsManager).InnerXml)
+                        HeartRateBpm = int.Parse(trackPoint.SelectSingleNode("blaha:HeartRateBpm/blaha:Value", nsManager).InnerXml),
+                        DateTime = DateTime.Parse(trackPoint.SelectSingleNode("blaha:Time", nsManager).InnerXml)
                     };
                     
                     lapToReturn.TrackPoints.Add(trackPointToReturn);
