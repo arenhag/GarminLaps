@@ -25,9 +25,9 @@ namespace GarminLaps
             xmlDocument.Load(fileLocation);
             
             var nsManager = new XmlNamespaceManager(xmlDocument.NameTable);
-            nsManager.AddNamespace("blaha", "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2");
+            nsManager.AddNamespace("TCDB", "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2");
 
-            var laps = xmlDocument.SelectNodes("blaha:TrainingCenterDatabase/blaha:Activities/blaha:Activity/blaha:Lap", nsManager);
+            var laps = xmlDocument.SelectNodes("TCDB:TrainingCenterDatabase/TCDB:Activities/TCDB:Activity/TCDB:Lap", nsManager);
             var lapDataToReturn = new LapData();
 
 
@@ -36,17 +36,17 @@ namespace GarminLaps
                 var lapToReturn = new Lap();
 
                 /*var lapStartTime = DateTime.Parse(lap.Attributes["StartTime"].Value);
-                var lapLength = double.Parse(lap.SelectSingleNode("blaha:TotalTimeSeconds", nsManager).InnerXml);
+                var lapLength = double.Parse(lap.SelectSingleNode("TCDB:TotalTimeSeconds", nsManager).InnerXml);
                 var lapEndTime = lapStartTime.AddSeconds(lapLength);
-                var calories = int.Parse(lap.SelectSingleNode("blaha:Calories", nsManager).InnerXml);*/
+                var calories = int.Parse(lap.SelectSingleNode("TCDB:Calories", nsManager).InnerXml);*/
                 
-                var trackPoints = lap.SelectNodes("blaha:Track/blaha:Trackpoint", nsManager);
+                var trackPoints = lap.SelectNodes("TCDB:Track/TCDB:Trackpoint", nsManager);
                 foreach (XmlNode trackPoint in trackPoints)
                 {
                     var trackPointToReturn = new TrackPoint()
                     {
-                        HeartRateBpm = int.Parse(trackPoint.SelectSingleNode("blaha:HeartRateBpm/blaha:Value", nsManager).InnerXml),
-                        DateTime = DateTime.Parse(trackPoint.SelectSingleNode("blaha:Time", nsManager).InnerXml)
+                        HeartRateBpm = int.Parse(trackPoint.SelectSingleNode("TCDB:HeartRateBpm/TCDB:Value", nsManager).InnerXml),
+                        DateTime = DateTime.Parse(trackPoint.SelectSingleNode("TCDB:Time", nsManager).InnerXml)
                     };
                     
                     lapToReturn.TrackPoints.Add(trackPointToReturn);

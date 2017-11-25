@@ -11,13 +11,13 @@ namespace UnitTests
         public void ShouldBeAbleToSumIntegersProperly()
         {
             // Arrange
-            var blaha = new TcxFileReader();
+            var tcxFileReader = new TcxFileReader();
             var int1 = 10;
             var int2 = 20;
             var expectedResult = 30;
 
             // Act
-            var actualResult = blaha.JunkMethodForTest(int1, int2);
+            var actualResult = tcxFileReader.JunkMethodForTest(int1, int2);
 
             // Assert
             Assert.Equal(expectedResult, actualResult);
@@ -28,10 +28,10 @@ namespace UnitTests
         public void ShouldReturnCorrectNumberOfLaps(string testFileLocation, int expectedResult)
         {
             // Arrange
-            var blaha = new TcxFileReader();
+            var tcxFileReader = new TcxFileReader();
             
             // Act
-            var actualResult = blaha.ReadTcxFile(testFileLocation);
+            var actualResult = tcxFileReader.ReadTcxFile(testFileLocation);
 
             // Assert
             Assert.Equal(expectedResult, actualResult.Laps.Count);
@@ -43,11 +43,11 @@ namespace UnitTests
         public void ShouldReturnCorrectNumberOfTrackPointsPerLap(string testFileLocation, int lapNumber, int trackPointCount)
         {
             // Arrange
-            var blaha = new TcxFileReader();
+            var tcxFileReader = new TcxFileReader();
             var expectedResult = trackPointCount;
 
             // Act
-            var actualResult = blaha.ReadTcxFile(testFileLocation);
+            var actualResult = tcxFileReader.ReadTcxFile(testFileLocation);
 
             // Assert
             Assert.Equal(expectedResult, actualResult.Laps[lapNumber].TrackPoints.Count);
@@ -58,11 +58,11 @@ namespace UnitTests
         {
             // Arrange
             var testFileLocation = "twoLaps.tcx";
-            var blaha = new TcxFileReader();
+            var tcxFileReader = new TcxFileReader();
             var expectedResult = 0;
 
             // Act
-            var actualResult = blaha.ReadTcxFile(testFileLocation);
+            var actualResult = tcxFileReader.ReadTcxFile(testFileLocation);
             var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.HeartRateBpm < 1));
             var actualResultCount = allTrackPoints.Count();
 
@@ -75,11 +75,11 @@ namespace UnitTests
         {
             // Arrange
             var testFileLocation = "twoLaps.tcx";
-            var blaha = new TcxFileReader();
+            var tcxFileReader = new TcxFileReader();
             var expectedResult = 0;
 
             // Act
-            var actualResult = blaha.ReadTcxFile(testFileLocation);
+            var actualResult = tcxFileReader.ReadTcxFile(testFileLocation);
             var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.DateTime == DateTime.MinValue));
             var actualResultCount = allTrackPoints.Count();
 
