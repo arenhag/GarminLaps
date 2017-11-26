@@ -12,6 +12,7 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
     <ProjectReference Include="..\GarminLaps\GarminLaps.csproj" />
     <None Include="twoLaps.tcx" CopyToOutputDirectory="Always" />
+    <None Include="noHeartRateBpm.tcx" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
 </Project>

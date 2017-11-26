@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using GarminLaps.Dto;
+using GarminLaps.Extensions;
 
 namespace GarminLaps
 {
@@ -43,10 +44,12 @@ namespace GarminLaps
                 var trackPoints = lap.SelectNodes("TCDB:Track/TCDB:Trackpoint", nsManager);
                 foreach (XmlNode trackPoint in trackPoints)
                 {
+                    var heartRateBpm = (trackPoint.SelectSingleNode("TCDB:HeartRateBpm/TCDB:Value", nsManager)).GetOptionalValue<int>();
+                    
                     var trackPointToReturn = new TrackPoint()
                     {
-                        HeartRateBpm = int.Parse(trackPoint.SelectSingleNode("TCDB:HeartRateBpm/TCDB:Value", nsManager).InnerXml),
-                        DateTime = DateTime.Parse(trackPoint.SelectSingleNode("TCDB:Time", nsManager).InnerXml)
+                        DateTime = DateTime.Parse(trackPoint.SelectSingleNode("TCDB:Time", nsManager).InnerXml), // non-optional value
+                        HeartRateBpm = heartRateBpm // optional value
                     };
                     
                     lapToReturn.TrackPoints.Add(trackPointToReturn);
@@ -54,8 +57,6 @@ namespace GarminLaps
 
                 lapDataToReturn.Laps.Add(lapToReturn);
             }
-
-            xmlDocument.Save("test.tcx");
 
             return lapDataToReturn;
         }

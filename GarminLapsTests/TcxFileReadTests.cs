@@ -54,16 +54,16 @@ namespace UnitTests
         }
 
         [Fact]
-        public void ShouldHaveHeartRatesInAllTrackPoints()
+        public void ShouldHaveNonDefaultHeartRatesInTrackPointsWithHeartRate()
         {
             // Arrange
-            var testFileLocation = "twoLaps.tcx";
+            var testFileLocation = "noHeartRateBpm.tcx";
             var tcxFileReader = new TcxFileReader();
             var expectedResult = 0;
 
             // Act
             var actualResult = tcxFileReader.ReadTcxFile(testFileLocation);
-            var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.HeartRateBpm < 1));
+            var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.HeartRateBpm != null && b.HeartRateBpm < 1));
             var actualResultCount = allTrackPoints.Count();
 
             // Assert

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TrainingCenterDatabase
+  xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd"
+  xmlns:ns5="http://www.garmin.com/xmlschemas/ActivityGoals/v1"
+  xmlns:ns3="http://www.garmin.com/xmlschemas/ActivityExtension/v2"
+  xmlns:ns2="http://www.garmin.com/xmlschemas/UserProfile/v2"
+  xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns4="http://www.garmin.com/xmlschemas/ProfileExtension/v1">
+  <Activities>
+    <Activity Sport="Other">
+      <Id>2017-10-21T09:59:20.000Z</Id>
+      <Lap StartTime="2017-10-21T09:59:20.000Z">
+        <TotalTimeSeconds>1591.0</TotalTimeSeconds>
+        <DistanceMeters>6902.25</DistanceMeters>
+        <MaximumSpeed>23.069000244140625</MaximumSpeed>
+        <Calories>321</Calories>
+        <AverageHeartRateBpm>
+          <Value>170</Value>
+        </AverageHeartRateBpm>
+        <MaximumHeartRateBpm>
+          <Value>181</Value>
+        </MaximumHeartRateBpm>
+        <Intensity>Active</Intensity>
+        <TriggerMethod>Manual</TriggerMethod>
+        <Track>
+          <Trackpoint>
+            <Time>2017-10-21T09:59:20.000Z</Time>
+            <Position>
+              <LatitudeDegrees>59.52137609012425</LatitudeDegrees>
+              <LongitudeDegrees>18.40088297612965</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>42.79999923706055</AltitudeMeters>
+            <DistanceMeters>0.0</DistanceMeters>
+            <!--<HeartRateBpm>
+              <Value>119</Value>
+            </HeartRateBpm>-->
+            <Extensions>
+              <ns3:TPX>
+                <ns3:Speed>21.357999801635742</ns3:Speed>
+              </ns3:TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2017-10-21T09:59:21.000Z</Time>
+            <Position>
+              <LatitudeDegrees>59.52137609012425</LatitudeDegrees>
+              <LongitudeDegrees>18.40088297612965</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>42.79999923706055</AltitudeMeters>
+            <DistanceMeters>0.0</DistanceMeters>
+            <HeartRateBpm>
+              <Value>119</Value>
+            </HeartRateBpm>
+            <Extensions>
+              <ns3:TPX>
+                <ns3:Speed>21.357999801635742</ns3:Speed>
+              </ns3:TPX>
+            </Extensions>
+          </Trackpoint>
+        </Track>
+      </Lap>
+      <Creator xsi:type="Device_t">
+        <Name>fenix 5 – Sapphire Edition</Name>
+        <UnitId>3949671669</UnitId>
+        <ProductID>2697</ProductID>
+        <Version>
+          <VersionMajor>6</VersionMajor>
+          <VersionMinor>6</VersionMinor>
+          <BuildMajor>0</BuildMajor>
+          <BuildMinor>0</BuildMinor>
+        </Version>
+      </Creator>
+    </Activity>
+  </Activities>
+  <Author xsi:type="Application_t">
+    <Name>Garmin Connect API</Name>
+    <Build>
+      <Version>
+        <VersionMajor>17</VersionMajor>
+        <VersionMinor>20</VersionMinor>
+        <BuildMajor>0</BuildMajor>
+        <BuildMinor>0</BuildMinor>
+      </Version>
+    </Build>
+    <LangID>en</LangID>
+    <PartNumber>006-D2449-00</PartNumber>
+  </Author>
+</TrainingCenterDatabase>
