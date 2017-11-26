@@ -7,22 +7,6 @@ namespace UnitTests
 {
     public class TcxFileReaderTests
     {
-        [Fact]
-        public void ShouldBeAbleToSumIntegersProperly()
-        {
-            // Arrange
-            var tcxFileReader = new TcxFileReader();
-            var int1 = 10;
-            var int2 = 20;
-            var expectedResult = 30;
-
-            // Act
-            var actualResult = tcxFileReader.JunkMethodForTest(int1, int2);
-
-            // Assert
-            Assert.Equal(expectedResult, actualResult);
-        }
-
         [Theory]
         [InlineData("twoLaps.tcx",2)]
         public void ShouldReturnCorrectNumberOfLaps(string testFileLocation, int expectedResult)
