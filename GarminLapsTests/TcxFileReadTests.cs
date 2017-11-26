@@ -9,7 +9,7 @@ namespace UnitTests
     {
         [Theory]
         [InlineData("twoLaps.tcx",2)]
-        public void ShouldReturnCorrectNumberOfLaps(string testFileLocation, int expectedResult)
+        public void Should_return_correct_number_of_laps(string testFileLocation, int expectedResult)
         {
             // Arrange
             var tcxFileReader = new TcxFileReader();
@@ -24,7 +24,7 @@ namespace UnitTests
         [Theory]
         [InlineData("twoLaps.tcx", 0, 801)]
         [InlineData("twoLaps.tcx", 1, 672)]
-        public void ShouldReturnCorrectNumberOfTrackPointsPerLap(string testFileLocation, int lapNumber, int trackPointCount)
+        public void Should_return_correct_number_of_track_points_per_lap(string testFileLocation, int lapNumber, int trackPointCount)
         {
             // Arrange
             var tcxFileReader = new TcxFileReader();
@@ -38,7 +38,7 @@ namespace UnitTests
         }
 
         [Fact]
-        public void ShouldHaveNonDefaultHeartRatesInTrackPointsWithHeartRate()
+        public void Should_have_non_default_heart_rates_in_track_points_with_heart_rate()
         {
             // Arrange
             var testFileLocation = "noHeartRateBpm.tcx";
@@ -55,7 +55,7 @@ namespace UnitTests
         }
 
         [Fact]
-        public void ShouldHaveTimeInAllTrackPoints()
+        public void Should_have_time_in_all_track_points()
         {
             // Arrange
             var testFileLocation = "twoLaps.tcx";
