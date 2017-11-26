@@ -104,5 +104,22 @@ namespace UnitTests
             // Assert
             Assert.Equal(expectedResult, actualResultCount);
         }
+
+        [Theory]
+        [InlineData("twoLaps.tcx", 1473)]
+        [InlineData("onlyTime.tcx", 0)]
+        public void Should_have_non_null_distance_meters_in_track_points_with_distance_meters(string testFileLocation, int expectedResult)
+        {
+            // Arrange
+            var tcxFileReader = new TcxFileReader();
+
+            // Act
+            var actualResult = tcxFileReader.ReadTcxFile(testFileLocation);
+            var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.DistanceMeters != null));
+            var actualResultCount = allTrackPoints.Count();
+
+            // Assert
+            Assert.Equal(expectedResult, actualResultCount);
+        }
     }
 }

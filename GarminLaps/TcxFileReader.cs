@@ -45,13 +45,14 @@ namespace GarminLaps
                     var latitude = (trackPoint.SelectSingleNode("TCDB:Position/TCDB:LatitudeDegrees", nsManager)).GetOptionalValue<double>();
                     var longitude = (trackPoint.SelectSingleNode("TCDB:Position/TCDB:LongitudeDegrees", nsManager)).GetOptionalValue<double>();
                     var altitudeMeters = (trackPoint.SelectSingleNode("TCDB:AltitudeMeters", nsManager)).GetOptionalValue<double>();
+                    var distanceMeters = (trackPoint.SelectSingleNode("TCDB:DistanceMeters", nsManager)).GetOptionalValue<double>();
                     
                     var trackPointToReturn = new TrackPoint()
                     {
                         DateTime = DateTime.Parse(trackPoint.SelectSingleNode("TCDB:Time", nsManager).InnerXml), // non-optional value
                         Position = (latitude != null && longitude != null) ? new Position(){LatitudeDegrees = (double)latitude, LongitudeDegrees = (double)longitude} : null,
                         AltitudeMeters = altitudeMeters,
-                        // DistanceMeters
+                        DistanceMeters = distanceMeters,
                         HeartRateBpm = heartRateBpm
                         // Cadence
                         // SensorState

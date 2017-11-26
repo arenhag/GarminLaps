@@ -8,5 +8,6 @@ namespace GarminLaps.Dto
         public int? HeartRateBpm { get; set; }
         public Position Position { get; set; }
         public double? AltitudeMeters { get; set; }
+        public double? DistanceMeters { get; set; }
     }
 }
