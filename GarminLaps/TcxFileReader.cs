@@ -38,18 +38,18 @@ namespace GarminLaps
                 var lapEndTime = lapStartTime.AddSeconds(lapLength);
                 var calories = int.Parse(lap.SelectSingleNode("TCDB:Calories", nsManager).InnerXml);*/
                 
-                var trackPoints = lap.SelectNodes("TCDB:Track/TCDB:Trackpoint", nsManager);
-                foreach (XmlNode trackPoint in trackPoints)
+                var sourceTrackPoints = lap.SelectNodes("TCDB:Track/TCDB:Trackpoint", nsManager);
+                foreach (XmlNode sourceTrackPoint in sourceTrackPoints)
                 {
-                    var heartRateBpm = (trackPoint.SelectSingleNode("TCDB:HeartRateBpm/TCDB:Value", nsManager)).GetOptionalValue<int>();
-                    var latitude = (trackPoint.SelectSingleNode("TCDB:Position/TCDB:LatitudeDegrees", nsManager)).GetOptionalValue<double>();
-                    var longitude = (trackPoint.SelectSingleNode("TCDB:Position/TCDB:LongitudeDegrees", nsManager)).GetOptionalValue<double>();
-                    var altitudeMeters = (trackPoint.SelectSingleNode("TCDB:AltitudeMeters", nsManager)).GetOptionalValue<double>();
-                    var distanceMeters = (trackPoint.SelectSingleNode("TCDB:DistanceMeters", nsManager)).GetOptionalValue<double>();
+                    var heartRateBpm = (sourceTrackPoint.SelectSingleNode("TCDB:HeartRateBpm/TCDB:Value", nsManager)).GetOptionalValue<int>();
+                    var latitude = (sourceTrackPoint.SelectSingleNode("TCDB:Position/TCDB:LatitudeDegrees", nsManager)).GetOptionalValue<double>();
+                    var longitude = (sourceTrackPoint.SelectSingleNode("TCDB:Position/TCDB:LongitudeDegrees", nsManager)).GetOptionalValue<double>();
+                    var altitudeMeters = (sourceTrackPoint.SelectSingleNode("TCDB:AltitudeMeters", nsManager)).GetOptionalValue<double>();
+                    var distanceMeters = (sourceTrackPoint.SelectSingleNode("TCDB:DistanceMeters", nsManager)).GetOptionalValue<double>();
                     
                     var trackPointToReturn = new TrackPoint()
                     {
-                        DateTime = DateTime.Parse(trackPoint.SelectSingleNode("TCDB:Time", nsManager).InnerXml), // non-optional value
+                        DateTime = DateTime.Parse(sourceTrackPoint.SelectSingleNode("TCDB:Time", nsManager).InnerXml), // non-optional value
                         Position = (latitude != null && longitude != null) ? new Position(){LatitudeDegrees = (double)latitude, LongitudeDegrees = (double)longitude} : null,
                         AltitudeMeters = altitudeMeters,
                         DistanceMeters = distanceMeters,
