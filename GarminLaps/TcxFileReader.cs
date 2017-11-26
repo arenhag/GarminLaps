@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
 using System.Xml;
 using GarminLaps.Dto;
 using GarminLaps.Extensions;
@@ -31,7 +29,6 @@ namespace GarminLaps
             var laps = xmlDocument.SelectNodes("TCDB:TrainingCenterDatabase/TCDB:Activities/TCDB:Activity/TCDB:Lap", nsManager);
             var lapDataToReturn = new LapData();
 
-
             foreach (XmlNode lap in laps)
             {
                 var lapToReturn = new Lap();
@@ -45,13 +42,21 @@ namespace GarminLaps
                 foreach (XmlNode trackPoint in trackPoints)
                 {
                     var heartRateBpm = (trackPoint.SelectSingleNode("TCDB:HeartRateBpm/TCDB:Value", nsManager)).GetOptionalValue<int>();
+                    var latitude = (trackPoint.SelectSingleNode("TCDB:Position/TCDB:LatitudeDegrees", nsManager)).GetOptionalValue<double>();
+                    var longitude = (trackPoint.SelectSingleNode("TCDB:Position/TCDB:LongitudeDegrees", nsManager)).GetOptionalValue<double>();
                     
                     var trackPointToReturn = new TrackPoint()
                     {
                         DateTime = DateTime.Parse(trackPoint.SelectSingleNode("TCDB:Time", nsManager).InnerXml), // non-optional value
-                        HeartRateBpm = heartRateBpm // optional value
+                        Position = (latitude != null && longitude != null) ? new Position(){LatitudeDegrees = (double)latitude, LongitudeDegrees = (double)longitude} : null,
+                        // AltitudeMeters
+                        // DistanceMeters
+                        HeartRateBpm = heartRateBpm
+                        // Cadence
+                        // SensorState
+                        // Extensions -- perhaps just parse this as an anonymous XML blob?
                     };
-                    
+
                     lapToReturn.TrackPoints.Add(trackPointToReturn);
                 }
 

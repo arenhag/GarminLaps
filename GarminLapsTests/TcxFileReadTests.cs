@@ -37,34 +37,51 @@ namespace UnitTests
             Assert.Equal(expectedResult, actualResult.Laps[lapNumber].TrackPoints.Count);
         }
 
-        [Fact]
-        public void Should_have_non_default_heart_rates_in_track_points_with_heart_rate()
+        [Theory]
+        [InlineData("twoLaps.tcx", 1473)]
+        [InlineData("onlyTime.tcx", 1)]
+        public void Should_have_time_in_all_track_points(string testFileLocation, int expectedResult)
         {
             // Arrange
-            var testFileLocation = "noHeartRateBpm.tcx";
             var tcxFileReader = new TcxFileReader();
-            var expectedResult = 0;
 
             // Act
             var actualResult = tcxFileReader.ReadTcxFile(testFileLocation);
-            var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.HeartRateBpm != null && b.HeartRateBpm < 1));
+            var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.DateTime != null));
             var actualResultCount = allTrackPoints.Count();
 
             // Assert
             Assert.Equal(expectedResult, actualResultCount);
         }
 
-        [Fact]
-        public void Should_have_time_in_all_track_points()
+        [Theory]
+        [InlineData("twoLaps.tcx", 1473)]
+        [InlineData("onlyTime.tcx", 0)]
+        public void Should_have_non_null_heart_rates_in_track_points_with_heart_rate(string testFileLocation, int expectedResult)
         {
             // Arrange
-            var testFileLocation = "twoLaps.tcx";
             var tcxFileReader = new TcxFileReader();
-            var expectedResult = 0;
 
             // Act
             var actualResult = tcxFileReader.ReadTcxFile(testFileLocation);
-            var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.DateTime == DateTime.MinValue));
+            var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.HeartRateBpm != null));
+            var actualResultCount = allTrackPoints.Count();
+
+            // Assert
+            Assert.Equal(expectedResult, actualResultCount);
+        }
+
+        [Theory]
+        [InlineData("twoLaps.tcx", 1473)]
+        [InlineData("onlyTime.tcx", 0)]
+        public void Should_have_non_null_positions_in_track_points_with_position(string testFileLocation, int expectedResult)
+        {
+            // Arrange
+            var tcxFileReader = new TcxFileReader();
+
+            // Act
+            var actualResult = tcxFileReader.ReadTcxFile(testFileLocation);
+            var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.Position != null));
             var actualResultCount = allTrackPoints.Count();
 
             // Assert
