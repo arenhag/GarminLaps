@@ -13,11 +13,6 @@ namespace GarminLaps
 
     internal class TcxFileReader
     {
-        internal int JunkMethodForTest(int a, int b)
-        {
-            return a + b;
-        }
-
         internal LapData ReadTcxFile(string fileLocation)
         {
             var xmlDocument = new XmlDocument();
