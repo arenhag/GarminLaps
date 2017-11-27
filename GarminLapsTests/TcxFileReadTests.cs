@@ -156,5 +156,22 @@ namespace UnitTests
             // Assert
             Assert.Equal(expectedResult, actualResultCount);
         }
+
+        [Theory]
+        [InlineData("twoLaps.tcx", 1473)]
+        [InlineData("onlyTime.tcx", 0)]
+        public void Should_have_non_null_extensions_in_track_points_with_extensions(string testFileLocation, int expectedResult)
+        {
+            // Arrange
+            var tcxFileReader = new TcxFileReader();
+
+            // Act
+            var actualResult = tcxFileReader.ReadTcxFile(testFileLocation);
+            var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.Extensions != null && b.Extensions.StartsWith("<Extensions")));
+            var actualResultCount = allTrackPoints.Count();
+
+            // Assert
+            Assert.Equal(expectedResult, actualResultCount);
+        }
     }
 }

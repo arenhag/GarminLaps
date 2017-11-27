@@ -43,6 +43,7 @@ namespace GarminLaps
                     var distanceMeters = (sourceTrackPoint.SelectSingleNode("TCDB:DistanceMeters", nsManager)).GetOptionalValue<double>();
                     var cadence = (sourceTrackPoint.SelectSingleNode("TCDB:Cadence", nsManager)).GetOptionalValue<byte>();
                     var sensorState = ((sourceTrackPoint.SelectSingleNode("TCDB:SensorState", nsManager)) == null) ? SensorState.None : (SensorState)Enum.Parse(typeof(SensorState), (sourceTrackPoint.SelectSingleNode("TCDB:SensorState", nsManager)).InnerXml);
+                    var extensions = ((sourceTrackPoint.SelectSingleNode("TCDB:Extensions", nsManager)) == null) ? String.Empty : (sourceTrackPoint.SelectSingleNode("TCDB:Extensions", nsManager)).OuterXml;
                     
                     var trackPointToReturn = new TrackPoint()
                     {
@@ -52,8 +53,8 @@ namespace GarminLaps
                         DistanceMeters = distanceMeters,
                         HeartRateBpm = heartRateBpm,
                         Cadence = cadence,
-                        SensorState = sensorState
-                        // Extensions -- perhaps just parse this as an anonymous XML blob?
+                        SensorState = sensorState,
+                        Extensions = extensions
                     };
 
                     lapToReturn.TrackPoints.Add(trackPointToReturn);
