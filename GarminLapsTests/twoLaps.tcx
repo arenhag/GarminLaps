@@ -34,6 +34,8 @@
             <HeartRateBpm>
               <Value>119</Value>
             </HeartRateBpm>
+            <SensorState>Absent</SensorState>
+            <Cadence>1</Cadence>
             <Extensions>
               <ns3:TPX>
                 <ns3:Speed>21.357999801635742</ns3:Speed>

@@ -2,6 +2,7 @@ using System;
 using Xunit;
 using GarminLaps;
 using System.Linq;
+using GarminLaps.Dto;
 
 namespace UnitTests
 {
@@ -116,6 +117,40 @@ namespace UnitTests
             // Act
             var actualResult = tcxFileReader.ReadTcxFile(testFileLocation);
             var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.DistanceMeters != null));
+            var actualResultCount = allTrackPoints.Count();
+
+            // Assert
+            Assert.Equal(expectedResult, actualResultCount);
+        }
+
+        [Theory]
+        [InlineData("twoLaps.tcx", 1)]
+        [InlineData("onlyTime.tcx", 0)]
+        public void Should_have_non_default_sensor_state_in_track_points_with_sensor_state(string testFileLocation, int expectedResult)
+        {
+            // Arrange
+            var tcxFileReader = new TcxFileReader();
+
+            // Act
+            var actualResult = tcxFileReader.ReadTcxFile(testFileLocation);
+            var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.SensorState != SensorState.None));
+            var actualResultCount = allTrackPoints.Count();
+
+            // Assert
+            Assert.Equal(expectedResult, actualResultCount);
+        }
+
+        [Theory]
+        [InlineData("twoLaps.tcx", 1)]
+        [InlineData("onlyTime.tcx", 0)]
+        public void Should_have_non_null_cadence_in_track_points_with_cadence(string testFileLocation, int expectedResult)
+        {
+            // Arrange
+            var tcxFileReader = new TcxFileReader();
+
+            // Act
+            var actualResult = tcxFileReader.ReadTcxFile(testFileLocation);
+            var allTrackPoints = actualResult.Laps.SelectMany(a => a.TrackPoints.Where(b => b.Cadence != null));
             var actualResultCount = allTrackPoints.Count();
 
             // Assert

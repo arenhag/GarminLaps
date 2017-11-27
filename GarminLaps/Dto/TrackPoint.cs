@@ -9,5 +9,7 @@ namespace GarminLaps.Dto
         public Position Position { get; set; }
         public double? AltitudeMeters { get; set; }
         public double? DistanceMeters { get; set; }
+        public SensorState SensorState { get; set; }
+        public Byte? Cadence { get; set; }
     }
 }
