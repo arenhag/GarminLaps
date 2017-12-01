@@ -26,12 +26,35 @@ namespace GarminLaps
 
             foreach (XmlNode lap in laps)
             {
-                var lapToReturn = new Lap();
+
+                // What data do I need to map out new laps and perform the necessary calculations?
+
+                // Needed:
+                // * Calories
+
+                // Probably not needed:
+                // * TotalTimeSeconds
+                // * DistanceMeters
+                // * MaximumSpeed (optional)                
+                // * AverageHeartBeatBpm (optional)
+                // * MaximumHeartBeatBpm (optional)
+                // * Intensity
+                // * Cadence (optional)
+                // * TriggerMethod
+                // * Track (optional...!)
+                // * Notes (optional)
+                // * Extensions (optional)
 
                 /*var lapStartTime = DateTime.Parse(lap.Attributes["StartTime"].Value);
                 var lapLength = double.Parse(lap.SelectSingleNode("TCDB:TotalTimeSeconds", nsManager).InnerXml);
-                var lapEndTime = lapStartTime.AddSeconds(lapLength);
-                var calories = int.Parse(lap.SelectSingleNode("TCDB:Calories", nsManager).InnerXml);*/
+                var lapEndTime = lapStartTime.AddSeconds(lapLength);*/
+
+                var calories = UInt16.Parse(lap.SelectSingleNode("TCDB:Calories", nsManager).InnerXml);
+
+                var lapToReturn = new Lap()
+                {
+                    Calories = calories
+                };
                 
                 var sourceTrackPoints = lap.SelectNodes("TCDB:Track/TCDB:Trackpoint", nsManager);
                 foreach (XmlNode sourceTrackPoint in sourceTrackPoints)
@@ -47,7 +70,7 @@ namespace GarminLaps
                     
                     var trackPointToReturn = new TrackPoint()
                     {
-                        DateTime = DateTime.Parse(sourceTrackPoint.SelectSingleNode("TCDB:Time", nsManager).InnerXml), // non-optional value
+                        DateTime = DateTime.Parse(sourceTrackPoint.SelectSingleNode("TCDB:Time", nsManager).InnerXml),
                         Position = (latitude != null && longitude != null) ? new Position(){LatitudeDegrees = (double)latitude, LongitudeDegrees = (double)longitude} : null,
                         AltitudeMeters = altitudeMeters,
                         DistanceMeters = distanceMeters,

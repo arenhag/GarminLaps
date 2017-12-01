@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace GarminLaps.Dto
@@ -10,5 +11,6 @@ namespace GarminLaps.Dto
         }
         
         public List<TrackPoint> TrackPoints { get; set; }
+        public UInt16 Calories { get; set; }
     }
 }

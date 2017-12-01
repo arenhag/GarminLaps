@@ -37,5 +37,22 @@ namespace UnitTests
             // Assert
             Assert.Equal(expectedResult, actualResult.Laps[lapNumber].TrackPoints.Count);
         }
+
+        [Theory]
+        [InlineData("twoLaps.tcx", 0, 321)]
+        [InlineData("twoLaps.tcx", 1, 287)]
+        [InlineData("onlyTime.tcx", 0, 321)]
+        public void Should_have_calories_in_all_laps(string testFileLocation, int lapNumber, int calories)
+        {
+            // Arrange
+            var tcxFileReader = new TcxFileReader();
+            var expectedResult = calories;
+
+            // Act
+            var actualResult = tcxFileReader.ReadTcxFile(testFileLocation);
+
+            // Assert
+            Assert.Equal(expectedResult, actualResult.Laps[lapNumber].Calories);
+        }
     }
 }
