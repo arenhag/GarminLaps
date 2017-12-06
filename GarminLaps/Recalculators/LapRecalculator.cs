@@ -8,7 +8,7 @@ namespace GarminLaps.Recalculators
     {
         public LapData RedistributeLaps(LapData oldLapDto, List<TimeSpan> durationsForNewLaps)
         {
-            throw new NotImplementedException();
+            return oldLapDto;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace GarminLapsTests.RecalculationTests
                 // check that this "something" has performed correct calculations regarding heart rates and calories
 
             // Assert
-            Assert.False(true);
+            Assert.Equal(durationsForNewLaps.Count, newLapDto.Laps.Count + 1);
         }
 
         private LapData SetupFakeLapData(int numberOfLaps, int numberOfTrackPointsPerLap)
