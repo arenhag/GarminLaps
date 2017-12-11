@@ -40,8 +40,43 @@ namespace GarminLaps.Recalculators
                 });
             }
 
-            //var sumOfCalories = oldLapDto.Laps.Sum(a => a.Calories);
-            //var sumOfHeartRates = oldLapDto.Laps.SelectMany(a => a.TrackPoints).Sum(b => b.HeartRateBpm);
+            newLapDto = RecalculateLapCalories(newLapDto, oldLapDto);
+
+            return newLapDto;
+        }
+
+        private LapData RecalculateLapCalories(LapData newLapDto, LapData oldLapDto)
+        {
+            var sumOfCalories = oldLapDto.Laps.Sum(a => a.Calories);
+            var sumOfHeartRates = (int)oldLapDto.Laps.SelectMany(a => a.TrackPoints).Sum(b => b.HeartRateBpm);
+
+            var caloriesPerHeartRate = (double)sumOfCalories / sumOfHeartRates;
+
+            foreach (var lap in newLapDto.Laps)
+            {
+                var lapSumOfHeartRates = (int)lap.TrackPoints.Sum(a => a.HeartRateBpm);
+                lap.Calories = (ushort)Math.Round(caloriesPerHeartRate * lapSumOfHeartRates,0, MidpointRounding.AwayFromZero);
+            }
+
+            // reconciliate any missing or extra calories
+            // var newSumOfCalories = newLapDto.Laps.Sum(a => a.Calories);
+            // var differingCalories = sumOfCalories - newSumOfCalories;
+            // var lapCount = newLapDto.Laps.Count();
+
+            // if (differingCalories > 0)
+            // {
+            //     var i = 0;
+            //     do
+            //     {
+            //         newLapDto.Laps[i % lapCount].Calories++;
+            //         i++;
+            //     } while (differingCalories > 0);
+            // }
+            
+            // if (differingCalories < 0)
+            // {
+            //     // remove
+            // }
 
             return newLapDto;
         }
