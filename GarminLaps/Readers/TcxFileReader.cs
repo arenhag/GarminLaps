@@ -3,7 +3,7 @@ using System.Xml;
 using GarminLaps.Dto;
 using GarminLaps.Extensions;
 
-namespace GarminLaps
+namespace GarminLaps.Readers
 {
     // Flytta Track/Trackpoint[] från ett Lap till ett annat Lap
     // Ta bort ett Lap (och således flytta alla dess Track/Trackpoint[] till ett annat Lap)

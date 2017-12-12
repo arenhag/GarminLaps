@@ -3,8 +3,9 @@ using Xunit;
 using GarminLaps;
 using System.Linq;
 using GarminLaps.Dto;
+using GarminLaps.Readers;
 
-namespace UnitTests
+namespace GarminLapsTests.ReaderTests
 {
     public class TcxFileReaderTrackPointTests
     {
