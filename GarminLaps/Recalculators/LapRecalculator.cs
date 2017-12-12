@@ -59,24 +59,29 @@ namespace GarminLaps.Recalculators
             }
 
             // reconciliate any missing or extra calories
-            // var newSumOfCalories = newLapDto.Laps.Sum(a => a.Calories);
-            // var differingCalories = sumOfCalories - newSumOfCalories;
-            // var lapCount = newLapDto.Laps.Count();
+            var newSumOfCalories = newLapDto.Laps.Sum(a => a.Calories);
+            var differingCalories = sumOfCalories - newSumOfCalories;
+            var lapCount = newLapDto.Laps.Count();
 
-            // if (differingCalories > 0)
-            // {
-            //     var i = 0;
-            //     do
-            //     {
-            //         newLapDto.Laps[i % lapCount].Calories++;
-            //         i++;
-            //     } while (differingCalories > 0);
-            // }
-            
-            // if (differingCalories < 0)
-            // {
-            //     // remove
-            // }
+            if (differingCalories != 0)
+            {
+                var i = 0;
+                do
+                {
+                    if (differingCalories > 0)
+                    {
+                        newLapDto.Laps[i % lapCount].Calories++;
+                        differingCalories--;
+                    }
+
+                    if (differingCalories < 0)
+                    {
+                        newLapDto.Laps[i % lapCount].Calories--;
+                        differingCalories++;
+                    }
+                    i++;                    
+                } while (differingCalories != 0);
+            }
 
             return newLapDto;
         }
